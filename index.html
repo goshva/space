@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            overflow-x: hidden;
         }
         header {
             background: linear-gradient(90deg, #4A90E2, #9013FE);
@@ -75,18 +76,99 @@
         a:hover {
             text-decoration: underline;
         }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #preloader .film-reel {
+            width: 100px;
+            height: 100px;
+            border: 5px solid #4A90E2;
+            border-top: 5px solid #9013FE;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .parallax {
+            position: relative;
+            overflow: hidden;
+            background: url('https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies5-936x1363.jpg') no-repeat center center;
+            background-size: cover;
+            height: 500px;
+        }
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            top: 200px;
+        }
     </style>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 1000);
+        });
+
+        window.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.parallax');
+            const scrolled = window.scrollY;
+            parallax.style.backgroundPositionY = -(scrolled * 0.01) + 'px';
+        });
+    </script>
 </head>
 <body>
+    <div id="preloader">
+        <div class="film-reel"></div>
+    </div>
+
     <header>
         <h1>1924: A Cinematic Revolution</h1>
     </header>
+
+    <div class="parallax">
+        <div class="content">Welcome to the Cinematic Journey of 1924</div>
+    </div>
+
     <main>
         <div class="author">A guest article by film historian Ivan Vasilyev</div>
 
         <p>Cinema history is filled with landmark moments: the Lumière brothers’ first film screening, Georges Méliès' <em>A Trip to the Moon</em>, the advent of sound and color, and the debut of 3D films. Each innovation pushed the boundaries of storytelling, enriching the visual language filmmakers use to connect with audiences. The narrative style of cinema has constantly evolved, but one year stood out as a game-changer—a year when silent films began to <em>speak</em> in a way never seen before, reshaping the art form forever.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies1.jpg" alt="Films from 1924">
         </figure>
 
@@ -94,31 +176,31 @@
 
         <p>The year 1924 marked an explosion of creativity in filmmaking. In the young Soviet Union, Sergei Eisenstein debuted <em>Strike</em>, blending artistry with revolutionary fervor. His "montage of attractions" technique used dynamic shots to create a visceral, emotional impact, turning cinema into a tool for collective storytelling. Eisenstein's pioneering methods emphasized conflict as the essence of drama, introducing a fresh, unorthodox perspective to narrative cinema.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies2.jpg" alt="Strike movie">
         </figure>
 
         <p>Dziga Vertov, another Soviet innovator, redefined documentary filmmaking with <em>Kino-Eye</em>. Eschewing actors and scripts, Vertov’s work transformed everyday life into a poetic mosaic, using montage as an art form to reflect reality’s rhythm and motion.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies3-909x1363.jpg" alt="Kino-Eye">
         </figure>
 
         <p>Meanwhile, <em>Aelita</em> by Yakov Protazanov took audiences to Mars with avant-garde visuals that merged science fiction and social commentary. Its revolutionary set designs and costumes broke cinematic ground, establishing it as a pioneering sci-fi film.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies5-936x1363.jpg" alt="Aelita film">
         </figure>
 
         <p>French surrealism made waves with René Clair's <em>Entr'acte</em>, a whimsical exploration of movement and absurdity. Bold visual experiments and collaborations with avant-garde artists resulted in a film that defied traditional storytelling.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies6-1005x1363.jpg" alt="Entr'acte movie">
         </figure>
 
         <p>Germany contributed with <em>The Last Laugh</em>, directed by F.W. Murnau, which used groundbreaking camera techniques to tell a story without intertitles. Its emotional depth and visual storytelling remain a benchmark in cinema history.</p>
 
-        <figure>
+        <figure class="parallax">
             <img src="https://blog.greenword.ru/wp-content/uploads/2024/12/sound-movies8.jpg" alt="The Last Laugh">
         </figure>
 
